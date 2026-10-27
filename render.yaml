@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: srms-backend
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    region: oregon
+    autoDeploy: true
+    healthCheckPath: /api/students/count
+    envVars:
+      - key: PORT
+        value: 10000

@@ -132,6 +132,40 @@ The React application will launch at **`http://localhost:5173`**.
 
 ---
 
+## ☁️ Cloud Deployment Guide (Render & Vercel)
+
+This repository is pre-configured with `render.yaml`, `backend/Dockerfile`, and `vercel.json` for one-click continuous deployment.
+
+### 1. Deploy Backend to Render 🚀
+1. Go to [Render Dashboard](https://dashboard.render.com/) and sign in with GitHub.
+2. Click **New +** > **Web Service**.
+3. Select your repository: `24eg105d24-bit/SRMS`.
+4. Render will auto-detect the configuration, or set:
+   - **Environment**: `Docker`
+   - **Docker Command / Dockerfile Path**: `./backend/Dockerfile`
+   - **Docker Context**: `./backend`
+   - **Instance Type**: `Free`
+5. Click **Create Web Service**.
+6. Once deployed, note down your live backend URL (e.g., `https://srms-backend.onrender.com`).
+
+---
+
+### 2. Deploy Frontend to Vercel ⚡
+1. Go to [Vercel Dashboard](https://vercel.com/) and sign in with GitHub.
+2. Click **Add New...** > **Project**.
+3. Import your repository: `24eg105d24-bit/SRMS`.
+4. Configure Project Settings:
+   - **Framework Preset**: `Vite`
+   - **Root Directory**: `frontend`
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+5. Under **Environment Variables**, add:
+   - **Name**: `VITE_API_BASE_URL`
+   - **Value**: `https://<YOUR-RENDER-BACKEND-URL>.onrender.com/api` (e.g. `https://srms-backend.onrender.com/api`)
+6. Click **Deploy**. Your React frontend will go live immediately on a `*.vercel.app` domain!
+
+---
+
 ## 🧪 Running Automated Tests
 
 Run the full backend test suite covering CRUD operations, validations, and duplicate checks:
